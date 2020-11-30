@@ -1,5 +1,7 @@
+import Screen from "./UI/Screen.js" 
+
 function main(){
-	console.log("main function started")
+	console.log(new Screen())
 }
 
 main()
