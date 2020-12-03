@@ -10,5 +10,12 @@ function Button(x, y, w, h, func){
 	this.removeFrom = function(screen){
 		screen.removeButton(this.botton)
 	}
+	this.attachView = function(v){
+		this.view = v
+	}
+	this.view = function(screen){	
+		screen.ctx.fillStyle= "#F00"
+		screen.ctx.fillRect(x,y,w,h)
+	}
 }
 export default Button

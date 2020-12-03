@@ -10,12 +10,9 @@ titleScreen.init = function(){
 	let button = new Button(100,100,100,100, function(){
 		console.log("this button is created successfully")
 	})
+	button.view(this)
 	this.addButton(button)
-
-	this.ctx.fillStyle= "#F00"
-	this.ctx.fillRect(100,100,100,100)
-	//can these be integrated into Button.js?
 	
-	console.log(this.buttons)
+	//dynamic rendering
 }
 export default titleScreen //???
