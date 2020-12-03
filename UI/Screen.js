@@ -19,20 +19,24 @@ function Screen(){
 	}
 	this.buttons = []
 	this.addButton = function(b){
-		//add button to this screen
 		this.cvs.addEventListener("click", b.buttonFunc)
 		this.buttons.push(b)
 	}
 	this.removeButton = function(b){
-		//remove button from this screen
 		this.cvs.removeEventListener("click", b.buttonFunc)
 		if(this.buttons.indexOf(b)!=-1)
 			this.buttons.splice(this.buttons.indexOf(b), 1)
 	}
-	this.removeAllButton = function(){
+	this.addAllButtons = function(){
+		this.buttons.forEach(b=>{
+			this.cvs.addEventListener("click", b.buttonFunc)
+		})
+	}
+	this.removeAllButtons  = function(){
 		this.buttons.forEach(b=>{
 			this.cvs.removeEventListener("click", b.buttonFunc)
 		})
+		this.buttons = [] // clear it
 	}
 }
 
