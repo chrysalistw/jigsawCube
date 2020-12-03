@@ -1,8 +1,12 @@
-import Screen from "./UI/Screen.js" 
-import Button from "./UI/Button.js"
+//import Screen from "./UI/Screen.js" 
+//Button from "./UI/Button.js"
+import titleScreen from "./UI/titleScreen.js"
+
+var cvs = document.getElementById("canvas")
 
 function main(){
-	console.log(new Button(0,0,10,10,()=>{}))
+	titleScreen.applyTo(cvs)
+	titleScreen.init()
 }
 
 main()

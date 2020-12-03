@@ -2,7 +2,7 @@
  */
 import Button from "./Button.js"
 
-function Screen(/*list of functions maybe*/){
+function Screen(){
 	this.applyTo = function(cvs){
 		this.cvs = cvs
 		this.ctx = cvs.getContext("2d")
