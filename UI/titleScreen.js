@@ -13,6 +13,7 @@ titleScreen.init = function(){
 	button.view(this)
 	this.addButton(button)
 	
-	//dynamic rendering
+	// tie button.view(screen) into button.applyTo and Screen.addButton
+	// dynamic rendering
 }
-export default titleScreen //???
+export default titleScreen
