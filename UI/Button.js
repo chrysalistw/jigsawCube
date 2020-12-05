@@ -1,4 +1,8 @@
 function Button(x, y, w, h, func){
+	this.x = x
+	this.y = y
+	this.width = w
+	this.height = h
 	this.buttonFunc = function(e){
 		if(x<e.offsetX&&e.offsetX<x+w)
 		if(y<e.offsetY&&e.offsetY<y+h)

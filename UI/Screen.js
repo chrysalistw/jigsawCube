@@ -7,9 +7,13 @@ function Screen(){
 		this.cvs = cvs
 		this.ctx = cvs.getContext("2d")
 	}
+	this.view = function(){}
+	this.addFeatures = function(){}
 	this.init = function(){
 		//draw background
+		this.view()
 		//add facilities
+		this.addFeatures()
 		console.log("this screen inited")
 	}
 	this.kill = function(){
