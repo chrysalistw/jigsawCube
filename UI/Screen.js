@@ -1,6 +1,5 @@
 /* building UI Screen
  */
-import Button from "./Button.js"
 
 function Screen(){
 	this.applyTo = function(cvs){
@@ -9,17 +8,19 @@ function Screen(){
 	}
 	this.view = function(){}
 	this.addFeatures = function(){}
+	this.removeFeatures = function(){
+		this.removeAllButtons()
+	}
 	this.init = function(){
 		//draw background
 		this.view()
 		//add facilities
 		this.addFeatures()
-		console.log("this screen inited")
 	}
 	this.kill = function(){
 		//remove facilities
 		//fill background with default color maybe
-		console.log("this screen killed")
+		this.removeFeatures()
 	}
 	this.buttons = []
 	this.addButton = function(b){

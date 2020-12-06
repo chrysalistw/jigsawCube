@@ -11,6 +11,7 @@ titleScreen.view = function(){
 }
 titleScreen.addFeatures = function(){
 	let button = new Button(100,100,100,50, function(){
+		titleScreen.kill()
 		gamingScreen.init()
 		console.log("this button is created successfully")
 	})
