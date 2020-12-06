@@ -13,8 +13,6 @@ gamingScreen.addFeatures = function(){
 	let button = new Button(200,150,40,30,function(){
 		gamingScreen.kill()
 		titleScreen.init()
-		console.log("there is no killing at all")
-		console.log("this button is created in gamingScreen")
 	})
 	button.attachView(function(screen){
 		screen.ctx.fillStyle = "blue"
