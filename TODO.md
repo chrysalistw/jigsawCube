@@ -11,3 +11,4 @@
     - minimize the redundant and cut it
     - previewer 
 - triangular version
+- copy .vimrc

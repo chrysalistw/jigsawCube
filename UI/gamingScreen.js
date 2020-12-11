@@ -1,6 +1,7 @@
 import Screen from "./Screen.js"
 import Button from "./Button.js"
 import titleScreen from "./titleScreen.js"
+import game from "../game.js" //?
 
 var gamingScreen = new Screen()
 gamingScreen.view = function(){
