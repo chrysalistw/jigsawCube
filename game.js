@@ -5,10 +5,11 @@ function Game(source, w, h){
 	this.source = source
 }
 Game.prototype.setField = function(){
-	this.field = new Array(this.height).fill(0)
-	             .map((e,j)=>new Array(this.width).fill(0)
+	this.field = new Array(this.height)
+		     .fill(0)
+	             .map((e,j)=>new Array(this.width)
+		     .fill(0)
 		     .map((m,i)=>this.width*j+i))
-	console.log(this.field)
 }
 
 
