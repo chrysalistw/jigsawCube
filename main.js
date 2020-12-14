@@ -15,6 +15,8 @@ async function main(){
 
 	let g = new Game("s", 3, 4)
 	g.setField()
+
+	gamingScreen.setGame(g)
 }
 
 main()
