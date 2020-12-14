@@ -27,16 +27,19 @@ function Screen(){
 		this.cvs.addEventListener("click", b.buttonFunc)
 		this.buttons.push(b)
 	}
+	this.registerButton = this.addButton
 	this.removeButton = function(b){
 		this.cvs.removeEventListener("click", b.buttonFunc)
 		if(this.buttons.indexOf(b)!=-1)
 			this.buttons.splice(this.buttons.indexOf(b), 1)
 	}
-	this.addAllButtons = function(){
-		this.buttons.forEach(b=>{
+	this.addAllButtons = function(buttonList){
+		buttonList.forEach(b=>{
+			console.log("this in Screen.addAllButtons forEach", this)
 			this.cvs.addEventListener("click", b.buttonFunc)
 		})
 	}
+	this.registerAllButtons = this.addAllButtons
 	this.removeAllButtons  = function(){
 		this.buttons.forEach(b=>{
 			this.cvs.removeEventListener("click", b.buttonFunc)

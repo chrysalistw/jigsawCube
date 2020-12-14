@@ -15,10 +15,10 @@ gamingScreen.setGame = function(game){
 	this.game = game
 }
 gamingScreen.addFeatures = function(){
-	let button = new Button(200,150,40,30,function(){
-		//gamingScreen.kill()
-		//titleScreen.init()
-		gamingScreen.drawField()
+	this.drawField()
+	let button = new Button(0,0,40,30,function(){
+		gamingScreen.kill()
+		titleScreen.init()
 	})
 	button.attachView(function(screen){
 		screen.ctx.fillStyle = "blue"
@@ -38,6 +38,9 @@ gamingScreen.drawField = function(){
 			spr.test[y][x].scaledDraw(this.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
 		})
 	})
+}
+gamingScreen.generateControllButtons = function(w,h){
+	
 }
 
 export default gamingScreen

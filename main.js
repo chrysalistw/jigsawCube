@@ -18,6 +18,7 @@ async function main(){
 	g.setField()
 
 	gamingScreen.setGame(g)
+	gamingScreen.addAllButtons([1,2,3])
 }
 
 main()
