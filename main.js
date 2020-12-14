@@ -8,6 +8,7 @@ cvs.width = 600
 cvs.height = 600
 
 async function main(){
+	//show splash / loading screen
 	await loadSprite()
 	titleScreen.applyTo(cvs)
 	titleScreen.init()
@@ -15,6 +16,8 @@ async function main(){
 
 	let g = new Game("s", 3, 4)
 	g.setField()
+
+	gamingScreen.setGame(g)
 }
 
 main()
