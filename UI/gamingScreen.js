@@ -26,23 +26,18 @@ gamingScreen.addFeatures = function(){
 	})
 	this.addButton(button)
 	button.view(this)
-	console.log(spr.test[1][2])
-	//spr.test[1][2].draw(this.ctx, marginX+tile*1, marginY+tile*2, tile, tile)
 }
 gamingScreen.drawField = function(){
 	const tile = 50
 	const c = this.cvs
-	const fg = this.game.field
-	const marginX = (c.width-fg.width*tile)/2
-	const marginY = (c.height-fg.height*tile)/2
-	/*
-	fg.forEach((e,y)=>{
+	const g = this.game
+	const marginX = (c.width-g.width*tile)/2
+	const marginY = (c.height-g.height*tile)/2
+	g.field.forEach((e,y)=>{
 		e.forEach((t,x)=>{
-			spr.test[x][y].draw(this.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
+			spr.test[y][x].scaledDraw(this.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
 		})
 	})
-	console.log(c.width, c.height)
-	*/
 }
 
 export default gamingScreen
