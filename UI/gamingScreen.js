@@ -1,7 +1,8 @@
 import Screen from "./Screen.js"
 import Button from "./Button.js"
 import titleScreen from "./titleScreen.js"
-import game from "../game.js" //?
+import game from "../game.js"
+import { spr } from "../Sprite/loadSprite.js"
 
 var gamingScreen = new Screen()
 gamingScreen.view = function(){
@@ -17,7 +18,7 @@ gamingScreen.addFeatures = function(){
 	let button = new Button(200,150,40,30,function(){
 		//gamingScreen.kill()
 		//titleScreen.init()
-		gamingScreen.showContents()
+		gamingScreen.drawField()
 	})
 	button.attachView(function(screen){
 		screen.ctx.fillStyle = "blue"
@@ -25,12 +26,23 @@ gamingScreen.addFeatures = function(){
 	})
 	this.addButton(button)
 	button.view(this)
+	console.log(spr.test[1][2])
+	//spr.test[1][2].draw(this.ctx, marginX+tile*1, marginY+tile*2, tile, tile)
 }
-gamingScreen.showContents = function(){
-	console.log(this.game.field)	
-	console.log(this.game.width, this.game.height)
-	console.log(this.game.source)
-	
+gamingScreen.drawField = function(){
+	const tile = 50
+	const c = this.cvs
+	const fg = this.game.field
+	const marginX = (c.width-fg.width*tile)/2
+	const marginY = (c.height-fg.height*tile)/2
+	/*
+	fg.forEach((e,y)=>{
+		e.forEach((t,x)=>{
+			spr.test[x][y].draw(this.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
+		})
+	})
+	console.log(c.width, c.height)
+	*/
 }
 
 export default gamingScreen
