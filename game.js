@@ -24,7 +24,6 @@ Game.prototype.moveColumnUp = function(num){
 		movingColumn.forEach((e,i)=>{
 			game.field[i][num] = e
 		})
-		//UI.updateCanvas()
 	}
 }
 Game.prototype.moveColumnDown = function(num){

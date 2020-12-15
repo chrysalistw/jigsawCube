@@ -35,7 +35,6 @@ function Screen(){
 	}
 	this.addAllButtons = function(buttonList){
 		buttonList.forEach(b=>{
-			console.log("this in Screen.addAllButtons forEach", this)
 			this.cvs.addEventListener("click", b.buttonFunc)
 		})
 	}

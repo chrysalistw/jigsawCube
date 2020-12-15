@@ -26,21 +26,94 @@ gamingScreen.addFeatures = function(){
 	})
 	this.addButton(button)
 	button.view(this)
+	this.generateControllButtons(this.game.width, this.game.height)
+	this.topButtons.forEach(b=>{
+		this.addButton(b)
+		b.view(this)
+	})
+	this.bottomButtons.forEach(b=>{
+		this.addButton(b)
+		b.view(this)
+	})
+	this.rightButtons.forEach(b=>{
+		this.addButton(b)
+		b.view(this)
+	})
+	this.leftButtons.forEach(b=>{
+		this.addButton(b)
+		b.view(this)
+	})
+	
 }
 gamingScreen.drawField = function(){
+	const gs = gamingScreen
+	const tile = 50
+	const c = gs.cvs
+	const g = gs.game
+	const marginX = (c.width-g.width*tile)/2
+	const marginY = (c.height-g.height*tile)/2
+	g.field.forEach((e,y)=>{
+		e.forEach((t,x)=>{
+			spr.test[t].scaledDraw(gs.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
+		})
+	})
+	//animation
+	gs.animation = requestAnimationFrame(gamingScreen.drawField)
+}
+gamingScreen.generateControllButtons = function(w,h){
 	const tile = 50
 	const c = this.cvs
 	const g = this.game
 	const marginX = (c.width-g.width*tile)/2
 	const marginY = (c.height-g.height*tile)/2
-	g.field.forEach((e,y)=>{
-		e.forEach((t,x)=>{
-			spr.test[y][x].scaledDraw(this.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
+	gamingScreen.topButtons = new Array(w).fill(0).map((e,i)=>{
+		var b = new Button(
+			marginX+i*tile, marginY-tile, tile, tile,
+			g.moveColumnUp(i)
+		)
+		b.attachView(s=>{
+			s.ctx.strokeRect(
+				marginX+i*tile, marginY-tile, tile, tile
+			)
 		})
-	})
-}
-gamingScreen.generateControllButtons = function(w,h){
-	
+		return b
+	})	
+	gamingScreen.bottomButtons = new Array(w).fill(0).map((e,i)=>{
+		var b = new Button(
+			marginX+i*tile, marginY+g.height*tile, tile, tile,
+			g.moveColumnDown(i)
+		)
+		b.attachView(s=>{
+			s.ctx.strokeRect(
+				marginX+i*tile, marginY+g.height*tile, tile, tile
+			)
+		})
+		return b
+	})	
+	gamingScreen.leftButtons = new Array(h).fill(0).map((e,i)=>{
+		var b = new Button(
+			marginX-tile, marginY+i*tile, tile, tile,
+			g.moveRowLeft(i)
+		)
+		b.attachView(s=>{
+			s.ctx.strokeRect(
+				marginX-tile, marginY+i*tile, tile, tile
+			)
+		})
+		return b
+	})	
+	gamingScreen.rightButtons = new Array(h).fill(0).map((e,i)=>{
+		var b = new Button(
+			marginX+g.width*tile, marginY+i*tile, tile, tile,
+			g.moveRowRight(i)
+		)
+		b.attachView(s=>{
+			s.ctx.strokeRect(
+				marginX+g.width*tile, marginY+i*tile, tile, tile
+			)
+		})
+		return b
+	})	
 }
 
 export default gamingScreen
