@@ -4,11 +4,12 @@ var Drag = function(md, mm, mu){
 	this.onMouseUp = mu
 	this.mouseDown = false
 }
-Drag.prototype.applyRange = function(x, y, w, h, f){
-	return function(e){
+Drag.prototype.applyRange = function(x, y, w, h){
+	this.inRange = function(e){
 		if(x<e.offsetX&&e.offsetX<x+w)
 		if(y<e.offsetY&&e.offsetY<y+h)
-			f()
+			return true
+		return false
 	}
 }
 Drag.prototype.attachView = function(v){
@@ -19,24 +20,24 @@ Drag.prototype.view = function(screen){
 	screen.ctx.fillRect(x,y,w,h)
 }
 Drag.prototype.applyTo = function(screen){
-	screen.Drag = this
 	let thisDrag = this
-	let md = function(e){
-		thisDrag.onMouseDown(e)
-		screen.cvs.addEventListener("mousemove", thisDrag.onMouseMove)
-		screen.cvs.addEventListener("mouseup", mu)
+	thisDrag.md = function(e){
+		if(thisDrag.inRange(e)){
+			thisDrag.onMouseDown(e)
+			screen.cvs.addEventListener("mousemove", thisDrag.onMouseMove)
+			screen.cvs.addEventListener("mouseup", mu)
+		}
 	}
 	let mu = function(e){
-		console.log("mouseup in Drag.js is called")
-		thisDrag.onMouseDown(e)
+		thisDrag.onMouseUp(e)
 		screen.cvs.removeEventListener("mousemove", thisDrag.onMouseMove)
 		screen.cvs.removeEventListener("mouseup", mu)
 	}
-	screen.cvs.addEventListener("mousedown", md)
+	screen.cvs.addEventListener("mousedown", thisDrag.md)
 }
 Drag.prototype.removeFrom = function(screen){
-	delete screen.Drag
-	screen.cvs.removeEventListener("mousedown", this.onMouseDown)
+	let thisDrag = this
+	screen.cvs.removeEventListener("mousedown", thisDrag.md)
 }
 
 export default Drag

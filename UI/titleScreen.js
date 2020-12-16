@@ -12,8 +12,10 @@ titleScreen.view = function(){
 }
 titleScreen.addFeatures = function(){
 	let button = new Button(100,100,100,50, function(){
-		titleScreen.kill()
-		gamingScreen.init()
+		//titleScreen.kill()
+		//gamingScreen.init()
+		d.removeFrom(titleScreen)
+		console.log(d)
 	})
 	button.view(this)
 	this.addButton(button)
@@ -23,6 +25,7 @@ titleScreen.addFeatures = function(){
 		()=>{console.log("mm")},
 		()=>{console.log("mu")}
 	)
+	d.applyRange(0,0,100,100)
 	d.applyTo(this)
 }
 export default titleScreen
