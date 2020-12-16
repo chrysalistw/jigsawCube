@@ -1,6 +1,7 @@
 import Screen from "./Screen.js"
 import Button from "./Button.js"
 import gamingScreen from "./gamingScreen.js"
+import Drag from "./Drag.js"
 
 var titleScreen = new Screen()
 titleScreen.view = function(){
@@ -17,7 +18,11 @@ titleScreen.addFeatures = function(){
 	button.view(this)
 	this.addButton(button)
 	
-	// tie button.view(screen) into button.applyTo and Screen.addButton
-	// dynamic rendering
+	let d = new Drag(
+		()=>{console.log("md")},
+		()=>{console.log("mm")},
+		()=>{console.log("mu")}
+	)
+	d.applyTo(this)
 }
 export default titleScreen
