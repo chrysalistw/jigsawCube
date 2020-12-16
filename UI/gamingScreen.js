@@ -124,9 +124,27 @@ gamingScreen.dragControll = new Drag(
 	},
 	//mousemove
 	function(e){
-		//decide to move vertically or horizontally
 		//animation of moving
-		console.log(e.movementX, e.movementY)
+		gamingScreen.direction = gamingScreen.direction || "" //horizontal/vertical
+		let tileTemp = {
+			x:Math.floor((e.offsetX-marginX)/tile),
+			y:Math.floor((e.offsetY-marginY)/tile)
+		}
+		if(gamingScreen.direction==""){
+			if(tileTemp.x!=gamingScreen.tileDragging.x
+			  ||tileTemp.y!=gamingScreen.tileDragging.y){
+				Math.abs(e.movementY/e.movementX) >= 1
+				?gamingScreen.direction = "vertical"
+				:gamingScreen.direction = "horizontal"
+			}
+		}else{
+			if(tileTemp.x==gamingScreen.tileDragging.x
+			&&tileTemp.y==gamingScreen.tileDragging.y){
+				gamingScreen.direction=""
+			}
+		}
+		//gamingScreen.movingAnimation
+		console.log(gamingScreen.direction)
 	},
 	//mouseup
 	function(e){
@@ -134,6 +152,10 @@ gamingScreen.dragControll = new Drag(
 			x:Math.floor((e.offsetX-marginX)/tile),
 			y:Math.floor((e.offsetY-marginY)/tile)
 		}
+		if(gamingScreen.direction=="vertical")
+			tileGoTo.x = gamingScreen.tileDragging.x
+		else if(gamingScreen.direction=="horizontal")
+			tileGoTo.y = gamingScreen.tileDragging.y
 		console.log(tileGoTo)
 	}
 )
