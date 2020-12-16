@@ -3,6 +3,7 @@ function Game(source, w, h){
 	this.width = w
 	this.height = h
 	this.source = source
+	this.setField()
 }
 Game.prototype.setField = function(){
 	this.field = new Array(this.height)

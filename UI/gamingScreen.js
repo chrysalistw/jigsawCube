@@ -3,8 +3,10 @@ import Button from "./Button.js"
 import titleScreen from "./titleScreen.js"
 import game from "../game.js"
 import { spr } from "../Sprite/loadSprite.js"
+import Drag from "./Drag.js"
 
 var gamingScreen = new Screen()
+var tile, marginX, marginY
 gamingScreen.view = function(){
 	this.width = this.cvs.width
 	this.height = this.cvs.height
@@ -15,17 +17,20 @@ gamingScreen.setGame = function(game){
 	this.game = game
 }
 gamingScreen.addFeatures = function(){
+	tile = 50
+	marginX = (this.cvs.width-this.game.width*tile)/2
+	marginY = (this.height-this.game.height*tile)/2
 	this.drawField()
-	let button = new Button(0,0,40,30,function(){
+	let goBackButton = new Button(0,0,40,30,function(){
 		gamingScreen.kill()
 		titleScreen.init()
 	})
-	button.attachView(function(screen){
+	goBackButton.attachView(function(screen){
 		screen.ctx.fillStyle = "blue"
 		screen.ctx.fillRect(this.x,this.y,this.width,this.height)
 	})
-	this.addButton(button)
-	button.view(this)
+	goBackButton.view(this)
+	this.addButton(goBackButton)
 	this.generateControllButtons(this.game.width, this.game.height)
 	this.topButtons.forEach(b=>{
 		this.addButton(b)
@@ -43,16 +48,13 @@ gamingScreen.addFeatures = function(){
 		this.addButton(b)
 		b.view(this)
 	})
+	this.dragControll.applyRange(0,0,this.cvs.width,this.cvs.height)
+	this.dragControll.applyTo(this)
 	
 }
 gamingScreen.drawField = function(){
-	const gs = gamingScreen
-	const tile = 50
-	const c = gs.cvs
-	const g = gs.game
-	const marginX = (c.width-g.width*tile)/2
-	const marginY = (c.height-g.height*tile)/2
-	g.field.forEach((e,y)=>{
+	let gs = gamingScreen
+	gs.game.field.forEach((e,y)=>{
 		e.forEach((t,x)=>{
 			spr.test[t].scaledDraw(gs.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
 		})
@@ -61,11 +63,7 @@ gamingScreen.drawField = function(){
 	gs.animation = requestAnimationFrame(gamingScreen.drawField)
 }
 gamingScreen.generateControllButtons = function(w,h){
-	const tile = 50
-	const c = this.cvs
-	const g = this.game
-	const marginX = (c.width-g.width*tile)/2
-	const marginY = (c.height-g.height*tile)/2
+	let g = gamingScreen.game
 	gamingScreen.topButtons = new Array(w).fill(0).map((e,i)=>{
 		var b = new Button(
 			marginX+i*tile, marginY-tile, tile, tile,
@@ -115,5 +113,28 @@ gamingScreen.generateControllButtons = function(w,h){
 		return b
 	})	
 }
-
+gamingScreen.dragControll = new Drag(
+	//mousedown
+	function(e){
+		gamingScreen.tileDragging = {
+			x:Math.floor((e.offsetX-marginX)/tile),
+			y:Math.floor((e.offsetY-marginY)/tile)
+		}
+		console.log(gamingScreen.tileDragging)
+	},
+	//mousemove
+	function(e){
+		//decide to move vertically or horizontally
+		//animation of moving
+		console.log(e.movementX, e.movementY)
+	},
+	//mouseup
+	function(e){
+		let tileGoTo = {
+			x:Math.floor((e.offsetX-marginX)/tile),
+			y:Math.floor((e.offsetY-marginY)/tile)
+		}
+		console.log(tileGoTo)
+	}
+)
 export default gamingScreen
