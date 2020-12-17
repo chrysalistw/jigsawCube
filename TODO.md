@@ -11,5 +11,6 @@
     - let user set row & column numbers
     - minimize the redundant and cut it
     - previewer 
+  - generate new problem / shuffle
 - triangular version
 - copy .vimrc
