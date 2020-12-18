@@ -13,17 +13,6 @@ gamingScreen.view = function(){
 	gs.height = gs.cvs.height
 	gs.ctx.fillStyle = "#0FF"
 	gs.ctx.fillRect(0,0,gs.width,gs.height)
-	//gs.animationList.push(gs.view)
-}
-gamingScreen.animationList = []
-gamingScreen.drawAllAnimation = function(){
-	gamingScreen.animationList.forEach(
-		animation => animation(gamingScreen)
-	)
-	console.log("animation")
-	gamingScreen.animation = requestAnimationFrame(
-		gamingScreen.drawAllAnimation
-	)
 }
 gamingScreen.setGame = function(game){
 	this.game = game
@@ -33,50 +22,45 @@ gamingScreen.addFeatures = function(){
 	tile = 50
 	marginX = (this.cvs.width-this.game.width*tile)/2
 	marginY = (this.height-this.game.height*tile)/2
-	gs.animationList.push(this.drawField)
 	let goBackButton = new Button(0,0,40,30,function(){
 		gamingScreen.kill()
 		titleScreen.init()
 	})
 	goBackButton.attachView(function(screen){
 		screen.ctx.fillStyle = "blue"
-		screen.ctx.fillRect(goBackButton.x,goBackButton.y,
-		                    goBackButton.width,goBackButton.height)
+		screen.ctx.fillRect(this.x,this.y,this.width,this.height)
 	})
-	gs.animationList.push(goBackButton.view)
 	this.addButton(goBackButton)
+	goBackButton.view(this)
+	this.drawField()
 	this.generateControllButtons(this.game.width, this.game.height)
 	this.topButtons.forEach(b=>{
 		this.addButton(b)
-		gamingScreen.animationList.push(b.view)
+		b.view(this)
+		//gamingScreen.animationList.push(b.view)
 	})
 	this.bottomButtons.forEach(b=>{
 		this.addButton(b)
-		gamingScreen.animationList.push(b.view)
+		b.view(this)
 	})
 	this.rightButtons.forEach(b=>{
 		this.addButton(b)
-		gamingScreen.animationList.push(b.view)
+		b.view(this)
 	})
 	this.leftButtons.forEach(b=>{
 		this.addButton(b)
-		gamingScreen.animationList.push(b.view)
+		b.view(this)
 	})
 	this.dragControll.applyRange(0,0,this.cvs.width,this.cvs.height)
 	this.dragControll.applyTo(this)
-	
 }
 gamingScreen.drawField = function(){
 	let gs = gamingScreen
-	gs.ctx.fillStyle = "#0fC"
-	gs.ctx.fillRect(0, 0, gs.width, gs.height)
 	gs.game.field.forEach((e,y)=>{
 		e.forEach((t,x)=>{
 			spr.test[t].scaledDraw(gs.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
 		})
 	})
-	//if(dragging)
-	//	gs.drawDragAnimation(dragDirection, dragFrom, dragTo)
 }
 gamingScreen.drawDragAnimation = function(direction, from, to){
 	let gs = gamingScreen
@@ -165,43 +149,29 @@ gamingScreen.dragControll = new Drag(
 	//mousemove
 	function(e){
 		let gs = gamingScreen
-		//animation of moving
-		gs.dragDirection = gs.dragDirection || "" //horizontal/vertical
+		gs.direction = gs.direction || "" //horizontal/vertical
+		if(gs.direction=="")
+			Math.abs(e.movementY/e.movementX) >= 1
+			?gs.direction = "vertical"
+			:gs.direction = "horizontal"
 		let tileTemp = {
-			x:Math.floor((e.offsetX-marginX)/tile),
-			y:Math.floor((e.offsetY-marginY)/tile)
+			x: gs.direction=="vertical"
+			   ?gs.tileDragging.x
+			   :Math.floor((e.offsetX-marginX)/tile),
+			y: gs.direction=="horizontal"
+			   ?gs.tileDragging.y
+			   :Math.floor((e.offsetY-marginY)/tile)
 		}
-		if(gs.direction==""){
-			if(tileTemp.x!=gs.tileDragging.x
-			   ||tileTemp.y!=gs.tileDragging.y){
-				Math.abs(e.movementY/e.movementX) >= 1
-				?gs.direction = "vertical"
-				:gs.direction = "horizontal"
-			}
-		}else{
-			if(tileTemp.x==gs.tileDragging.x
-			&&tileTemp.y==gs.tileDragging.y){
-				gs.direction=""
-			}
+		//not using game.move
+		console.log(gs.tileDragging.x, gs.tileDragging.y, ",", tileTemp.x, tileTemp.y)
+		if(gs.direction=="vetical"){
+			//getNewColumn(tileDragging, tileTemp)
 		}
-		gs.dragTo = tileTemp
-		//gamingScreen.movingAnimation
-		//gs.drawDragAnimation(gs.direction, gs.tileDragging, tileTemp)
+		if(gs.direction=="horizontal"){}
 	},
 	//mouseup
 	function(e){
-		let tileGoTo = {
-			x:Math.floor((e.offsetX-marginX)/tile),
-			y:Math.floor((e.offsetY-marginY)/tile)
-		}
-		if(gamingScreen.direction=="vertical")
-			tileGoTo.x = gamingScreen.tileDragging.x
-		else if(gamingScreen.direction=="horizontal")
-			tileGoTo.y = gamingScreen.tileDragging.y
-		console.log("tileGoTo", tileGoTo)
-		if(gamingScreen.direction=="vertical"){
-			
-		}
+		gs.direction = ""
 	}
 )
 export default gamingScreen

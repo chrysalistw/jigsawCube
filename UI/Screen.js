@@ -16,7 +16,6 @@ function Screen(){
 		this.view()
 		//add facilities
 		this.addFeatures()
-		this.drawAllAnimation()
 	}
 	this.kill = function(){
 		//remove facilities
