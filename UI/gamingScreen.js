@@ -61,15 +61,7 @@ gamingScreen.drawField = function(){
 			spr.test[t].scaledDraw(gs.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
 		})
 	})
-}
-gamingScreen.drawDragAnimation = function(direction, from, to){
-	let gs = gamingScreen
-	let g = gs.game
-	spr.test[from.y*g.width+from.x].scaledDraw(
-		gs.ctx, 
-		marginX+to.x*tile, marginY+to.y*tile, 
-		tile, tile
-	)
+	gs.animationNumber = requestAnimationFrame(gs.drawField)
 }
 gamingScreen.generateControllButtons = function(w,h){
 	let g = gamingScreen.game
@@ -145,6 +137,7 @@ gamingScreen.dragControll = new Drag(
 			x:Math.floor((e.offsetX-marginX)/tile),
 			y:Math.floor((e.offsetY-marginY)/tile)
 		}
+		gamingScreen.movingArray = []
 	},
 	//mousemove
 	function(e){
@@ -163,11 +156,40 @@ gamingScreen.dragControll = new Drag(
 			   :Math.floor((e.offsetY-marginY)/tile)
 		}
 		//not using game.move
-		console.log(gs.tileDragging.x, gs.tileDragging.y, ",", tileTemp.x, tileTemp.y)
-		if(gs.direction=="vetical"){
-			//getNewColumn(tileDragging, tileTemp)
+		if(gs.direction=="vertical"){
+			let shift = (gs.tileDragging.y - tileTemp.y) % gs.game.height
+			if(gs.movingArray.length==0){
+				gs.game.field.forEach(e=>{
+					gs.movingArray.push(e[gs.tileDragging.x])
+				})
+			}
+			let newArray = new Array(...gs.movingArray)
+			if(shift>0)
+				newArray.push(...newArray.splice(0, shift))
+			else{
+				let end = newArray.splice(shift, -shift)
+				end.push(...newArray)
+				newArray = end
+			}
+			gs.game.field.forEach((e,i)=>{
+				e[gs.tileDragging.x]=newArray[i]
+			})
 		}
-		if(gs.direction=="horizontal"){}
+		if(gs.direction=="horizontal"){
+			let shift = (gs.tileDragging.x - tileTemp.x) % gs.game.width
+			if(gs.movingArray.length==0){
+				gs.movingArray = new Array(...gs.game.field[gs.tileDragging.y])
+			}
+			let newArray = new Array(...gs.movingArray)
+			if(shift>0)
+				newArray.push(...newArray.splice(0, shift))
+			else{
+				let end = newArray.splice(shift, -shift)
+				end.push(...newArray)
+				newArray = end
+			}
+			gs.game.field[gs.tileDragging.y] = new Array(...newArray)
+		}
 	},
 	//mouseup
 	function(e){
