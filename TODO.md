@@ -1,16 +1,22 @@
 - LOGO
 - interface design
 - Features
-  - controller
-    - Buttons
-    - Dragging
-  - Level Selector
-  - Setting Panel
+  - [x] controller
+    - [x] Buttons
+    - [x] Dragging
+  -  [ ] Level Selector
+    - auto set source, width, height
+  - [ ] Setting Panel
     - settable background color?
-  - Uploader
+    - where to store stats?
+  - [ ] Uploader
     - let user set row & column numbers
     - minimize the redundant and cut it
     - previewer 
-  - generate new problem / shuffle
-- triangular version
+    - can be deleted
+  - [ ] local Storage
+    - online : no local Storge; uploaded level would be a <img> in html
+    - downloadable : in local directory
+  - [ ] generate new problem / shuffle
+- trian version
 - copy .vimrc

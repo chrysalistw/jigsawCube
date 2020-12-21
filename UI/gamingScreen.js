@@ -51,7 +51,7 @@ gamingScreen.addFeatures = function(){
 		this.addButton(b)
 		b.view(this)
 	})
-	this.dragControll.applyRange(0,0,this.cvs.width,this.cvs.height)
+	this.dragControll.applyRange(marginX, marginY, this.game.width*tile, this.game.height*tile)
 	this.dragControll.applyTo(this)
 }
 gamingScreen.drawField = function(){
