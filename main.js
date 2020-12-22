@@ -13,14 +13,14 @@ async function main(){
 	await loadSprite()
 //	titleScreen.applyTo(cvs)
 //	titleScreen.init()
-	//gamingScreen.applyTo(cvs)
-	//let g = new Game("s", 3, 3)
-//	g.setField()
+	gamingScreen.applyTo(cvs)
+	let g = new Game("s", 3, 3)
+	g.setField()
 
-	//gamingScreen.setGame(g)
-	//gamingScreen.init()
-	settingScreen.applyTo(cvs)
-	settingScreen.init()
+	gamingScreen.setGame(g)
+	gamingScreen.init()
+//	settingScreen.applyTo(cvs)
+//	settingScreen.init()
 }
 
 main()
