@@ -4,19 +4,16 @@
   - [x] controller
     - [x] Buttons
     - [x] Dragging
-  -  [ ] Level Selector
+  - [ ] Level Selector
     - auto set source, width, height
   - [ ] Setting Panel
-    - settable background color?
-    - where to store stats?
+    - [x] settable background color?
   - [ ] Uploader
     - let user set row & column numbers
     - minimize the redundant and cut it
     - previewer 
     - can be deleted
-  - [ ] local Storage
-    - online : no local Storge; uploaded level would be a <img> in html
-    - downloadable : in local directory
+  - [x] local Storage
   - [ ] generate new problem / shuffle
-- trian version
-- copy .vimrc
+- triangular version
+- code review
