@@ -143,18 +143,19 @@ gamingScreen.dragControll = new Drag(
 	function(e){
 		let gs = gamingScreen
 		gs.direction = gs.direction || "" //horizontal/vertical
-		//direction should be determined after cursur moves off original tile
-		if(gs.direction=="")
-			Math.abs(e.movementY/e.movementX) >= 1
+		let tileNow = {
+			x: Math.floor((e.offsetX-marginX)/tile),
+			y: Math.floor((e.offsetY-marginY)/tile)
+		}
+		if(gs.direction==""&&(tileNow.x!=gs.tileDragging.x||tileNow.y!=gs.tileDragging.y))
+			tileNow.x == gs.tileDragging.x
 			?gs.direction = "vertical"
 			:gs.direction = "horizontal"
 		let tileTemp = {
 			x: gs.direction=="vertical"
-			   ?gs.tileDragging.x
-			   :Math.floor((e.offsetX-marginX)/tile),
+			   ?gs.tileDragging.x:tileNow.x,
 			y: gs.direction=="horizontal"
-			   ?gs.tileDragging.y
-			   :Math.floor((e.offsetY-marginY)/tile)
+			   ?gs.tileDragging.y:tileNow.y
 		}
 		if(gs.direction=="vertical"){
 			let shift = (gs.tileDragging.y - tileTemp.y) % gs.game.height
