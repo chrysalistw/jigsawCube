@@ -9,13 +9,15 @@ function Button(x, y, w, h, func){
 			func()
 	}
 	this.applyTo = function(screen){
-		screen.addButton(this.button)
+		screen.addButton(this)
+		this.view(screen)
 	}
 	this.removeFrom = function(screen){
-		screen.removeButton(this.botton)
+		screen.removeButton(this)
 	}
 	this.attachView = function(v){
 		this.view = v
+		return this
 	}
 	this.view = function(screen){	
 		screen.ctx.fillStyle= "#F00"

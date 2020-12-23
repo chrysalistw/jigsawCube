@@ -12,15 +12,15 @@ function Screen(){
 		this.removeAllButtons()
 	}
 	this.init = function(){
-		//draw background
 		this.view()
-		//add facilities
 		this.addFeatures()
 	}
 	this.kill = function(){
-		//remove facilities
-		//fill background with default color maybe
 		this.removeFeatures()
+	}
+	this.reboot = function(){
+		this.kill()
+		this.init()
 	}
 	this.buttons = []
 	this.addButton = function(b){
