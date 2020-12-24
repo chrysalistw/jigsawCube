@@ -4,6 +4,7 @@ import settingScreen from "./UI/settingScreen.js"
 import loadSprite from "./Sprite/loadSprite.js"
 import Game from "./game.js"
 
+import { spr } from "./Sprite/loadSprite.js"
 var cvs = document.getElementById("canvas")
 cvs.width = 600
 cvs.height = 600
@@ -11,6 +12,7 @@ cvs.height = 600
 async function main(){
 	//show splash / loading screen
 	await loadSprite()
+	console.log(spr)
 	titleScreen.applyTo(cvs)
 
 	gamingScreen.applyTo(cvs)

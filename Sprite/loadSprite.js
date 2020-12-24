@@ -1,16 +1,26 @@
 import Sprite from "./Sprite.js"
+import levelStat from "../levelStat.js"
 
 var spr = {}
 var loadSprites = async function(){
-	let test = await Sprite.loadSource("../pics/test-3x3.png")
-	spr.test = new Array(3*3).fill(0)
-	spr.test = spr.test.map(
-		(e,n)=>{
-			let x = n%3
-			let y = (n-x)/3
-			return new Sprite(test, 30*x, 30*y, 30, 30)
-		}
-	)
+	for(let level in levelStat){
+		let l = levelStat[level]
+		let w = l.width
+		let h = l.height
+		let tw = l.tileWidth
+		let th = l.tileHeight
+		let source = await Sprite.loadSource(l.source)
+		spr[level] = new Array(w*h).fill(0)
+		spr[level] = spr[level].map(
+			(e,n)=>{
+				let x = n%w
+				let y = (n-x)/w
+				return new Sprite(source, tw*x, th*y, tw, th)
+			}
+		)
+		console.log(level, "loaded")
+		console.log(spr[level])
+	}
 }
 
 export default loadSprites

@@ -1,7 +1,8 @@
 import Screen from "./Screen.js"
 import Button from "./Button.js"
 import titleScreen from "./titleScreen.js"
-import game from "../game.js"
+import levelStat from "../levelStat.js"
+import Game from "../game.js"
 import { spr } from "../Sprite/loadSprite.js"
 import Drag from "./Drag.js"
 
@@ -19,6 +20,9 @@ gamingScreen.setGame = function(game){
 }
 gamingScreen.addFeatures = function(){
 	let gs = gamingScreen
+	gs.level = sessionStorage.level
+	gs.levelStat = levelStat[gs.level]
+	gs.setGame(new Game("s", gs.levelStat.width, gs.levelStat.height))
 	tile = 50
 	marginX = (this.cvs.width-this.game.width*tile)/2
 	marginY = (this.height-this.game.height*tile)/2
@@ -56,9 +60,10 @@ gamingScreen.addFeatures = function(){
 }
 gamingScreen.drawField = function(){
 	let gs = gamingScreen
+	let l = gs.levelStat
 	gs.game.field.forEach((e,y)=>{
 		e.forEach((t,x)=>{
-			spr.test[t].scaledDraw(gs.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
+			spr[gs.level][t].scaledDraw(gs.ctx, marginX+tile*x, marginY+tile*y, tile, tile)
 		})
 	})
 	gs.animationNumber = requestAnimationFrame(gs.drawField)

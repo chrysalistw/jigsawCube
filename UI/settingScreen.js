@@ -38,14 +38,24 @@ ss.addFeatures = function(){
 
 	//choose level
 	new Button(10,80,50,50, e=>{
-		sessionStorage.setItem("level", 1)
+		sessionStorage.setItem("level", "3x3")
 	}).attachView(
 		ss.strokedSquare("#ccc", 10, 80, 50, 50)
 	).applyTo(ss)
 	new Button(70,80,50,50, e=>{
-		sessionStorage.setItem("level",2)
+		sessionStorage.setItem("level", "4x4")
 	}).attachView(
 		ss.strokedSquare("#eee", 70, 80, 50, 50)
+	).applyTo(ss)
+	new Button(130,80,50,50, e=>{
+		sessionStorage.setItem("level", "bubble")
+	}).attachView(
+		ss.strokedSquare("#800", 130, 80, 50, 50)
+	).applyTo(ss)
+	new Button(190,80,50,50, e=>{
+		sessionStorage.setItem("level", "geometry")
+	}).attachView(
+		ss.strokedSquare("#FFF", 190, 80, 50, 50)
 	).applyTo(ss)
 }
 ss.strokedSquare = function(color, x, y, h, w){

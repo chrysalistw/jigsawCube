@@ -4,7 +4,7 @@
   - [x] controller
     - [x] Buttons
     - [x] Dragging
-  - [ ] Level Selector
+  - [x] Level Selector
     - auto set source, width, height
   - [ ] Setting Panel
     - [x] settable background color?
