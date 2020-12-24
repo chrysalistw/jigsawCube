@@ -11,7 +11,7 @@ var tile, marginX, marginY
 gamingScreen.view = function(){
 	gs.width = gs.cvs.width
 	gs.height = gs.cvs.height
-	gs.ctx.fillStyle = "#0FF"
+	gs.ctx.fillStyle = sessionStorage.bgColor
 	gs.ctx.fillRect(0,0,gs.width,gs.height)
 }
 gamingScreen.setGame = function(game){
@@ -197,4 +197,9 @@ gamingScreen.dragControll = new Drag(
 		gs.direction = ""
 	}
 )
+gamingScreen.kill = function(){
+	this.removeAllButtons()
+	gamingScreen.dragControll.removeFrom(gamingScreen)
+	cancelAnimationFrame(gamingScreen.animationNumber)
+}
 export default gamingScreen

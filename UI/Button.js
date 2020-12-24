@@ -11,6 +11,7 @@ function Button(x, y, w, h, func){
 	this.applyTo = function(screen){
 		screen.addButton(this)
 		this.view(screen)
+		return this
 	}
 	this.removeFrom = function(screen){
 		screen.removeButton(this)

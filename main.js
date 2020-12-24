@@ -11,18 +11,17 @@ cvs.height = 600
 async function main(){
 	//show splash / loading screen
 	await loadSprite()
-//	titleScreen.applyTo(cvs)
-//	titleScreen.init()
+	titleScreen.applyTo(cvs)
 
-//	gamingScreen.applyTo(cvs)
-//	let g = new Game("s", 3, 3)
-//	g.setField()
+	gamingScreen.applyTo(cvs)
+	let g = new Game("s", 3, 3)
+	g.setField()
 
-//	gamingScreen.setGame(g)
-//	gamingScreen.init()
+	gamingScreen.setGame(g)
 
 	settingScreen.applyTo(cvs)
-	settingScreen.init()
+
+	titleScreen.init()
 }
 
 main()
