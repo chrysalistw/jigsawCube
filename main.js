@@ -12,6 +12,8 @@ cvs.height = 600
 async function main(){
 	//show splash / loading screen
 	await loadSprite()
+	sessionStorage.setItem("bgColor", "#0FC")
+	sessionStorage.setItem("level", "3x3")
 	console.log(spr)
 	titleScreen.applyTo(cvs)
 
