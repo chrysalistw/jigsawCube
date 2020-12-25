@@ -3,6 +3,10 @@ import levelStat from "../levelStat.js"
 
 var spr = {}
 var loadSprites = async function(){
+	spr.title = new Sprite(
+		await Sprite.loadSource("pics/JCtitle_01.png"),
+		0, 0, 600, 600
+	)
 	for(let level in levelStat){
 		let l = levelStat[level]
 		let w = l.width
@@ -18,8 +22,6 @@ var loadSprites = async function(){
 				return new Sprite(source, tw*x, th*y, tw, th)
 			}
 		)
-		console.log(level, "loaded")
-		console.log(spr[level])
 	}
 }
 

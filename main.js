@@ -14,7 +14,6 @@ async function main(){
 	await loadSprite()
 	sessionStorage.setItem("bgColor", "#0FC")
 	sessionStorage.setItem("level", "3x3")
-	console.log(spr)
 	titleScreen.applyTo(cvs)
 
 	gamingScreen.applyTo(cvs)
