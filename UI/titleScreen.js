@@ -8,26 +8,28 @@ import { spr } from "../Sprite/loadSprite.js"
 var titleScreen = new Screen()
 titleScreen.view = function(){
 	let ctx = this.ctx
-	spr.title.draw(ctx, 0, 0, 600, 600)
+	ctx.fillStyle = sessionStorage.bgColor || "#0FC"
+	ctx.fillRect(0, 0, 600, 600)
+	spr.title.draw(ctx, 84, 55)
 }
 titleScreen.addFeatures = function(){
-	new Button(250, 350, 100, 50, e=>{
+	new Button(174.5, 288, 251, 49, e=>{
 		titleScreen.kill()
 		gamingScreen.init()
 	}).attachView(
-		scr=>{
-			scr.ctx.fillStyle = "red"
-			scr.ctx.fillRect(250, 350, 100, 50)
-		}
+		scr=>{spr.newGame.draw(scr.ctx, 174.5, 288)}
 	).applyTo(titleScreen)
-	new Button(250, 450, 100, 50, e=>{
+	new Button(174.5, 392, 251, 49, e=>{
+		titleScreen.kill()
+		gamingScreen.init()
+	}).attachView(
+		scr=>{spr.continue.draw(scr.ctx, 174.5, 392)}
+	).applyTo(titleScreen)
+	new Button(174.5, 496, 251, 49, e=>{
 		titleScreen.kill()
 		settingScreen.init()
 	}).attachView(
-		scr=>{
-			scr.ctx.fillStyle = "red"
-			scr.ctx.fillRect(250, 450, 100, 50)
-		}
+		scr=>{spr.settings.draw(scr.ctx, 174.5, 496)}
 	).applyTo(titleScreen)
 }
 export default titleScreen

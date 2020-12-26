@@ -4,8 +4,20 @@ import levelStat from "../levelStat.js"
 var spr = {}
 var loadSprites = async function(){
 	spr.title = new Sprite(
-		await Sprite.loadSource("pics/JCtitle_01.png"),
-		0, 0, 600, 600
+		await Sprite.loadSource("pics/JCtitle.png"),
+		0, 0, 432, 178
+	)
+	spr.newGame = new Sprite(
+		await Sprite.loadSource("pics/new_game.png"),
+		0, 0, 251, 49
+	)
+	spr.continue = new Sprite(
+		await Sprite.loadSource("pics/continue.png"),
+		0, 0, 251, 49
+	)
+	spr.settings = new Sprite(
+		await Sprite.loadSource("pics/settings.png"),
+		0, 0, 251, 49
 	)
 	for(let level in levelStat){
 		let l = levelStat[level]

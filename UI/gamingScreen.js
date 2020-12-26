@@ -20,7 +20,7 @@ gamingScreen.setGame = function(game){
 }
 gamingScreen.addFeatures = function(){
 	let gs = gamingScreen
-	gs.level = sessionStorage.level
+	gs.level = sessionStorage.level || "3x3"
 	gs.levelStat = levelStat[gs.level]
 	gs.setGame(new Game("s", gs.levelStat.width, gs.levelStat.height))
 	tile = 50
