@@ -4,16 +4,18 @@
   - [x] controller
     - [x] Buttons
     - [x] Dragging
-  - [x] Level Selector
     - auto set source, width, height
-  - [ ] Setting Panel
+  - [x] Setting Panel
     - [x] settable background color?
-  - [ ] Uploader
+    - [x] Level Selector
+    - [x] tile size
+    - [x] controller
+  - [ ] Uploader (only one?)
     - let user set row & column numbers
     - minimize the redundant and cut it
     - previewer 
     - can be deleted
-  - [x] local Storage
+  - [ ] store game field
   - [ ] generate new problem / shuffle
 - triangular version
 - code review

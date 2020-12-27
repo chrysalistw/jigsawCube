@@ -31,6 +31,18 @@ var loadSprites = async function(){
 		await Sprite.loadSource("pics/tile_size.png"),
 		0, 0, 275, 45
 	)
+	spr.controller = new Sprite(
+		await Sprite.loadSource("pics/controller.png"),
+		0, 0, 305, 45
+	)
+	spr.drag = new Sprite(
+		await Sprite.loadSource("pics/drag.png"),
+		0, 0, 125, 45
+	)
+	spr.button = new Sprite(
+		await Sprite.loadSource("pics/button.png"),
+		0, 0, 185, 45
+	)
 	spr.goBack = new Sprite(
 		await Sprite.loadSource("pics/go_back.png"),
 		0, 0, 215, 45

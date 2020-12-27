@@ -21,9 +21,10 @@ gamingScreen.setGame = function(game){
 gamingScreen.addFeatures = function(){
 	let gs = gamingScreen
 	gs.level = sessionStorage.level || "3x3"
+	sessionStorage.controller = sessionStorage.controller || "drag"
 	gs.levelStat = levelStat[gs.level]
 	gs.setGame(new Game("s", gs.levelStat.width, gs.levelStat.height))
-	tile = 50
+	tile = sessionStorage["tile size"] || "50"
 	marginX = (this.cvs.width-this.game.width*tile)/2
 	marginY = (this.height-this.game.height*tile)/2
 	let goBackButton = new Button(0,0,40,30,function(){
@@ -37,26 +38,30 @@ gamingScreen.addFeatures = function(){
 	this.addButton(goBackButton)
 	goBackButton.view(this)
 	this.drawField()
-	this.generateControllButtons(this.game.width, this.game.height)
-	this.topButtons.forEach(b=>{
-		this.addButton(b)
-		b.view(this)
-		//gamingScreen.animationList.push(b.view)
-	})
-	this.bottomButtons.forEach(b=>{
-		this.addButton(b)
-		b.view(this)
-	})
-	this.rightButtons.forEach(b=>{
-		this.addButton(b)
-		b.view(this)
-	})
-	this.leftButtons.forEach(b=>{
-		this.addButton(b)
-		b.view(this)
-	})
-	this.dragControll.applyRange(marginX, marginY, this.game.width*tile, this.game.height*tile)
-	this.dragControll.applyTo(this)
+	if(sessionStorage.controller=="button"){
+			this.generateControllButtons(this.game.width, this.game.height)
+			this.topButtons.forEach(b=>{
+				this.addButton(b)
+				b.view(this)
+				//gamingScreen.animationList.push(b.view)
+			})
+			this.bottomButtons.forEach(b=>{
+				this.addButton(b)
+				b.view(this)
+			})
+			this.rightButtons.forEach(b=>{
+				this.addButton(b)
+				b.view(this)
+			})
+			this.leftButtons.forEach(b=>{
+				this.addButton(b)
+				b.view(this)
+			})
+	}
+	if(sessionStorage.controller=="drag"){
+			this.dragControll.applyRange(marginX, marginY, this.game.width*tile, this.game.height*tile)
+			this.dragControll.applyTo(this)
+	}
 }
 gamingScreen.drawField = function(){
 	let gs = gamingScreen
