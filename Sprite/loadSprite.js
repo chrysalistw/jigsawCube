@@ -7,6 +7,14 @@ var loadSprites = async function(){
 		await Sprite.loadSource("pics/JCtitle.png"),
 		0, 0, 432, 178
 	)
+	spr.start = new Sprite(
+		await Sprite.loadSource("pics/start.png"),
+		0, 0, 161, 49
+	)
+	spr.level = new Sprite(
+		await Sprite.loadSource("pics/level.png"),
+		0, 0, 161, 49
+	)
 	spr.newGame = new Sprite(
 		await Sprite.loadSource("pics/new_game.png"),
 		0, 0, 251, 49
@@ -19,13 +27,25 @@ var loadSprites = async function(){
 		await Sprite.loadSource("pics/settings.png"),
 		0, 0, 251, 49
 	)
+	spr.shuffle = new Sprite(
+		await Sprite.loadSource("pics/shuffle.png"),
+		0, 0, 215, 45
+	)
+	spr.solve = new Sprite(
+		await Sprite.loadSource("pics/solve.png"),
+		0, 0, 155, 45
+	)
+	spr.chooseLevel = new Sprite(
+		await Sprite.loadSource("pics/choose_level.png"),
+		0, 0, 365, 45
+	)
 	spr.backgroundColor = new Sprite(
 		await Sprite.loadSource("pics/background_color.png"),
 		0, 0, 455, 45
 	)
 	spr.level = new Sprite(
 		await Sprite.loadSource("pics/level.png"),
-		0, 0, 155, 45
+		0, 0, 161, 49
 	)
 	spr.tileSize = new Sprite(
 		await Sprite.loadSource("pics/tile_size.png"),
@@ -47,6 +67,7 @@ var loadSprites = async function(){
 		await Sprite.loadSource("pics/go_back.png"),
 		0, 0, 215, 45
 	)
+	spr.thumb = []
 	for(let level in levelStat){
 		let l = levelStat[level]
 		let w = l.width
@@ -54,6 +75,7 @@ var loadSprites = async function(){
 		let tw = l.tileWidth
 		let th = l.tileHeight
 		let source = await Sprite.loadSource(l.source)
+		spr.thumb[level] = new Sprite(source, 0, 0, w*tw, h*th)
 		spr[level] = new Array(w*h).fill(0)
 		spr[level] = spr[level].map(
 			(e,n)=>{

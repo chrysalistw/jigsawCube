@@ -1,6 +1,7 @@
 import titleScreen from "./UI/titleScreen.js"
 import gamingScreen from "./UI/gamingScreen.js"
 import settingScreen from "./UI/settingScreen.js"
+import levelScreen from "./UI/levelScreen.js"
 import loadSprite from "./Sprite/loadSprite.js"
 import Game from "./game.js"
 
@@ -17,11 +18,12 @@ async function main(){
 	titleScreen.applyTo(cvs)
 
 	gamingScreen.applyTo(cvs)
-	let g = new Game("s", 3, 3)
-	g.setField()
+//	let g = new Game("s", 3, 3)
+//	g.setField()
 
-	gamingScreen.setGame(g)
+//	gamingScreen.setGame(g)
 
+	levelScreen.applyTo(cvs)
 	settingScreen.applyTo(cvs)
 
 	titleScreen.init()

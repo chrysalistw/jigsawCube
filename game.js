@@ -25,10 +25,8 @@ Game.prototype.shuffle = function(){
 	//unflat
 	let w = this.width
 	this.field.forEach((e,i)=>{
-		//console.log(e,i,flat.slice(i*w,i*w+w))
 		this.field[i]=new Array(...flat.slice(i*w,i*w+w))
 	})
-	console.log(this.field)
 }
 Game.prototype.moveColumnUp = function(num){
 	let game = this
@@ -54,7 +52,6 @@ Game.prototype.moveColumnDown = function(num){
 		movingColumn.forEach((e,i)=>{
 			game.field[i][num] = e
 		})
-		//UI.updateCanvas()
 	}
 }
 Game.prototype.moveRowRight = function(num){
@@ -68,7 +65,6 @@ Game.prototype.moveRowRight = function(num){
 		movingRow.forEach((e,i)=>{
 			game.field[num][i] = e
 		})
-		//UI.updateCanvas()
 	}
 }
 Game.prototype.moveRowLeft = function(num){
@@ -82,7 +78,6 @@ Game.prototype.moveRowLeft = function(num){
 		movingRow.forEach((e,i)=>{
 			game.field[num][i] = e
 		})
-		//UI.updateCanvas()
 	}
 }
 

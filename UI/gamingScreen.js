@@ -17,7 +17,12 @@ gamingScreen.view = function(){
 }
 gamingScreen.setGame = function(game){
 	this.game = game
-	this.game.shuffle()
+	if(!sessionStorage[gs.level]){
+		this.game.shuffle()
+	}
+	else{
+		this.game.field = JSON.parse(sessionStorage[gs.level])
+	}
 }
 gamingScreen.addFeatures = function(){
 	let gs = gamingScreen
@@ -36,6 +41,18 @@ gamingScreen.addFeatures = function(){
 		scr=>{spr.goBack.draw(scr.ctx, 375, 545)}
 	).applyTo(gamingScreen)
 	this.drawField()
+	//shuffle button
+	new Button(20, 20, 215, 45, e=>{
+		this.game.shuffle()
+	}).attachView(
+		scr=>{spr.shuffle.draw(scr.ctx, 20, 20)}
+	).applyTo(gamingScreen)
+	//solve button
+	new Button(425, 20, 155, 45, e=>{
+		this.game.setField()
+	}).attachView(
+		scr=>{spr.solve.draw(scr.ctx, 425, 20)}
+	).applyTo(gamingScreen)
 	if(sessionStorage.controller=="button"){
 			this.generateControllButtons(this.game.width, this.game.height)
 			this.topButtons.forEach(b=>{
@@ -202,6 +219,7 @@ gamingScreen.dragControll = new Drag(
 	//mouseup
 	function(e){
 		gs.direction = ""
+		sessionStorage[gs.level] = JSON.stringify(gs.game.field)
 	}
 )
 gamingScreen.kill = function(){
