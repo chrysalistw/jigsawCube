@@ -1,3 +1,5 @@
+import "./permutate.js"
+
 function Game(source, w, h){
 	this.bgColor = "#0EE"
 	this.width = w
@@ -8,12 +10,26 @@ function Game(source, w, h){
 Game.prototype.setField = function(){
 	this.field = new Array(this.height)
 		     .fill(0)
-	             .map((e,j)=>new Array(this.width)
+		     .map((e,j)=>new Array(this.width)
 		     .fill(0)
 		     .map((m,i)=>this.width*j+i))
 }
 
-
+Game.prototype.shuffle = function(){
+	let flat = []
+	this.field.forEach(e=>{flat=flat.concat(e)})
+	if(this.width%2!=0&&this.height%2!=0)
+		flat.evenPermutate()
+	else
+		flat.shuffle()
+	//unflat
+	let w = this.width
+	this.field.forEach((e,i)=>{
+		//console.log(e,i,flat.slice(i*w,i*w+w))
+		this.field[i]=new Array(...flat.slice(i*w,i*w+w))
+	})
+	console.log(this.field)
+}
 Game.prototype.moveColumnUp = function(num){
 	let game = this
 	return function(){

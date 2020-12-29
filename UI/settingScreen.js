@@ -17,22 +17,28 @@ ss.view = function(){
 ss.addFeatures = function(){
 	//bg color
 	new Button(70,55+38.75/2,50,50, e=>{
-		sessionStorage.setItem("bgColor", "blue")
+		sessionStorage.setItem("bgColor", "white")
 		ss.reboot()
 	}).attachView(
-		ss.strokedSquare("blue", 70, 55+38.75/2, 50, 50)
+		ss.strokedSquare("white", 70, 55+38.75/2, 50, 50)
 	).applyTo(ss)
-	new Button(130,55+38.75/2,50,50, e=>{
+	new Button(140,55+38.75/2,50,50, e=>{
+		sessionStorage.setItem("bgColor", "lightgray")
+		ss.reboot()
+	}).attachView(
+		ss.strokedSquare("lightgray", 140, 55+38.75/2, 50, 50)
+	).applyTo(ss)
+	new Button(210,55+38.75/2,50,50, e=>{
 		sessionStorage.setItem("bgColor", "#0FC")
 		ss.reboot()
 	}).attachView(
-		ss.strokedSquare("#0FC", 130, 55+38.75/2, 50, 50)
+		ss.strokedSquare("#0FC", 210, 55+38.75/2, 50, 50)
 	).applyTo(ss)
-	new Button(190,55+38.75/2,50,50, e=>{
-		sessionStorage.setItem("bgColor", "orange")
+	new Button(280,55+38.75/2,50,50, e=>{
+		sessionStorage.setItem("bgColor", "#FC0")
 		ss.reboot()
 	}).attachView(
-		ss.strokedSquare("orange", 190, 55+38.75/2, 50, 50)
+		ss.strokedSquare("#FC0", 280, 55+38.75/2, 50, 50)
 	).applyTo(ss)
 	//controller
 	new Button(70, 188.75+38.75/2, 125, 45, e=>{
@@ -77,7 +83,7 @@ ss.addFeatures = function(){
 		ss.strokedSquare("#800", 130, 456.5+38.75/2, 50, 50)
 	).applyTo(ss)
 	new Button(190,456.5+38.75/2,50,50, e=>{
-		sessionStorage.setItem("level", "geometry")
+		sessionStorage.setItem("level", "damselfly")
 	}).attachView(
 		ss.strokedSquare("#FFF", 190, 456.5+38.75/2, 50, 50)
 	).applyTo(ss)

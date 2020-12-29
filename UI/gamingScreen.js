@@ -17,6 +17,7 @@ gamingScreen.view = function(){
 }
 gamingScreen.setGame = function(game){
 	this.game = game
+	this.game.shuffle()
 }
 gamingScreen.addFeatures = function(){
 	let gs = gamingScreen
@@ -27,23 +28,19 @@ gamingScreen.addFeatures = function(){
 	tile = sessionStorage["tile size"] || "50"
 	marginX = (this.cvs.width-this.game.width*tile)/2
 	marginY = (this.height-this.game.height*tile)/2
-	let goBackButton = new Button(0,0,40,30,function(){
+	// go back
+	new Button(375, 545, 215, 45, e=>{
 		gamingScreen.kill()
 		titleScreen.init()
-	})
-	goBackButton.attachView(function(screen){
-		screen.ctx.fillStyle = "blue"
-		screen.ctx.fillRect(this.x,this.y,this.width,this.height)
-	})
-	this.addButton(goBackButton)
-	goBackButton.view(this)
+	}).attachView(
+		scr=>{spr.goBack.draw(scr.ctx, 375, 545)}
+	).applyTo(gamingScreen)
 	this.drawField()
 	if(sessionStorage.controller=="button"){
 			this.generateControllButtons(this.game.width, this.game.height)
 			this.topButtons.forEach(b=>{
 				this.addButton(b)
 				b.view(this)
-				//gamingScreen.animationList.push(b.view)
 			})
 			this.bottomButtons.forEach(b=>{
 				this.addButton(b)
