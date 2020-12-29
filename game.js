@@ -1,10 +1,8 @@
 import "./permutate.js"
 
-function Game(source, w, h){
-	this.bgColor = "#0EE"
+function Game(w, h){
 	this.width = w
 	this.height = h
-	this.source = source
 	this.setField()
 }
 Game.prototype.setField = function(){
@@ -22,63 +20,10 @@ Game.prototype.shuffle = function(){
 		flat.evenPermutate()
 	else
 		flat.shuffle()
-	//unflat
 	let w = this.width
 	this.field.forEach((e,i)=>{
 		this.field[i]=new Array(...flat.slice(i*w,i*w+w))
 	})
-}
-Game.prototype.moveColumnUp = function(num){
-	let game = this
-	return function(){
-		var movingColumn = new Array()
-		game.field.forEach(e=>{
-			movingColumn.push(e[num])
-		})
-		movingColumn.push(movingColumn.shift())
-		movingColumn.forEach((e,i)=>{
-			game.field[i][num] = e
-		})
-	}
-}
-Game.prototype.moveColumnDown = function(num){
-	let game = this
-	return function(){
-		var movingColumn = new Array()
-		game.field.forEach(e=>{
-			movingColumn.push(e[num])
-		})
-		movingColumn.unshift(movingColumn.pop())
-		movingColumn.forEach((e,i)=>{
-			game.field[i][num] = e
-		})
-	}
-}
-Game.prototype.moveRowRight = function(num){
-	let game = this
-	return function(){
-		var movingRow = new Array()
-		game.field[num].forEach(e=>{
-			movingRow.push(e)
-		})
-		movingRow.unshift(movingRow.pop())
-		movingRow.forEach((e,i)=>{
-			game.field[num][i] = e
-		})
-	}
-}
-Game.prototype.moveRowLeft = function(num){
-	let game = this
-	return function(){
-		var movingRow = new Array()
-		game.field[num].forEach(e=>{
-			movingRow.push(e)
-		})
-		movingRow.push(movingRow.shift())
-		movingRow.forEach((e,i)=>{
-			game.field[num][i] = e
-		})
-	}
 }
 
 export default Game

@@ -8,29 +8,26 @@ import Drag from "./Drag.js"
 
 var gamingScreen = new Screen()
 const gs = gamingScreen
-var tile, marginX, marginY
+var tile = 75, marginX, marginY
 gamingScreen.view = function(){
 	gs.width = gs.cvs.width
 	gs.height = gs.cvs.height
-	gs.ctx.fillStyle = sessionStorage.bgColor
+	gs.ctx.fillStyle = "#FC0"
 	gs.ctx.fillRect(0,0,gs.width,gs.height)
 }
 gamingScreen.setGame = function(game){
 	this.game = game
-	if(!sessionStorage[gs.level]){
+	if(!localStorage[gs.level])
 		this.game.shuffle()
-	}
-	else{
-		this.game.field = JSON.parse(sessionStorage[gs.level])
-	}
+	else
+		this.game.field = JSON.parse(localStorage[gs.level])
+	localStorage[gs.level] = JSON.stringify(gs.game.field)
 }
 gamingScreen.addFeatures = function(){
 	let gs = gamingScreen
-	gs.level = sessionStorage.level || "3x3"
-	sessionStorage.controller = sessionStorage.controller || "drag"
+	gs.level = localStorage.level || "3x3"
 	gs.levelStat = levelStat[gs.level]
-	gs.setGame(new Game("s", gs.levelStat.width, gs.levelStat.height))
-	tile = sessionStorage["tile size"] || "50"
+	gs.setGame(new Game(gs.levelStat.width, gs.levelStat.height))
 	marginX = (this.cvs.width-this.game.width*tile)/2
 	marginY = (this.height-this.game.height*tile)/2
 	// go back
@@ -53,29 +50,9 @@ gamingScreen.addFeatures = function(){
 	}).attachView(
 		scr=>{spr.solve.draw(scr.ctx, 425, 20)}
 	).applyTo(gamingScreen)
-	if(sessionStorage.controller=="button"){
-			this.generateControllButtons(this.game.width, this.game.height)
-			this.topButtons.forEach(b=>{
-				this.addButton(b)
-				b.view(this)
-			})
-			this.bottomButtons.forEach(b=>{
-				this.addButton(b)
-				b.view(this)
-			})
-			this.rightButtons.forEach(b=>{
-				this.addButton(b)
-				b.view(this)
-			})
-			this.leftButtons.forEach(b=>{
-				this.addButton(b)
-				b.view(this)
-			})
-	}
-	if(sessionStorage.controller=="drag"){
-			this.dragControll.applyRange(marginX, marginY, this.game.width*tile, this.game.height*tile)
-			this.dragControll.applyTo(this)
-	}
+	//add drag controll
+	this.dragControll.applyRange(marginX, marginY, this.game.width*tile, this.game.height*tile)
+	this.dragControll.applyTo(this)
 }
 gamingScreen.drawField = function(){
 	let gs = gamingScreen
@@ -86,73 +63,6 @@ gamingScreen.drawField = function(){
 		})
 	})
 	gs.animationNumber = requestAnimationFrame(gs.drawField)
-}
-gamingScreen.generateControllButtons = function(w,h){
-	let g = gamingScreen.game
-	gamingScreen.topButtons = new Array(w).fill(0).map((e,i)=>{
-		var b = new Button(
-			marginX+i*tile, marginY-tile, tile, tile,
-			g.moveColumnUp(i)
-		)
-		b.attachView(s=>{
-			s.ctx.fillStyle = "#0ff"
-			s.ctx.fillRect(
-				marginX+i*tile, marginY-tile, tile, tile
-			)
-			s.ctx.strokeRect(
-				marginX+i*tile, marginY-tile, tile, tile
-			)
-		})
-		return b
-	})	
-	gamingScreen.bottomButtons = new Array(w).fill(0).map((e,i)=>{
-		var b = new Button(
-			marginX+i*tile, marginY+g.height*tile, tile, tile,
-			g.moveColumnDown(i)
-		)
-		b.attachView(s=>{
-			s.ctx.fillStyle = "#0ff"
-			s.ctx.fillRect(
-				marginX+i*tile, marginY+g.height*tile, tile, tile
-			)
-			s.ctx.strokeRect(
-				marginX+i*tile, marginY+g.height*tile, tile, tile
-			)
-		})
-		return b
-	})	
-	gamingScreen.leftButtons = new Array(h).fill(0).map((e,i)=>{
-		var b = new Button(
-			marginX-tile, marginY+i*tile, tile, tile,
-			g.moveRowLeft(i)
-		)
-		b.attachView(s=>{
-			s.ctx.fillStyle = "#0ff"
-			s.ctx.fillRect(
-				marginX-tile, marginY+i*tile, tile, tile
-			)
-			s.ctx.strokeRect(
-				marginX-tile, marginY+i*tile, tile, tile
-			)
-		})
-		return b
-	})	
-	gamingScreen.rightButtons = new Array(h).fill(0).map((e,i)=>{
-		var b = new Button(
-			marginX+g.width*tile, marginY+i*tile, tile, tile,
-			g.moveRowRight(i)
-		)
-		b.attachView(s=>{
-			s.ctx.fillStyle = "#0ff"
-			s.ctx.fillRect(
-				marginX+g.width*tile, marginY+i*tile, tile, tile
-			)
-			s.ctx.strokeRect(
-				marginX+g.width*tile, marginY+i*tile, tile, tile
-			)
-		})
-		return b
-	})	
 }
 gamingScreen.dragControll = new Drag(
 	//mousedown
@@ -219,7 +129,7 @@ gamingScreen.dragControll = new Drag(
 	//mouseup
 	function(e){
 		gs.direction = ""
-		sessionStorage[gs.level] = JSON.stringify(gs.game.field)
+		localStorage[gs.level] = JSON.stringify(gs.game.field)
 	}
 )
 gamingScreen.kill = function(){
