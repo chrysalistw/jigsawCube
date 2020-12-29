@@ -1,7 +1,6 @@
 import Screen from "./Screen.js"
 import Button from "./Button.js"
 import gamingScreen from "./gamingScreen.js"
-//import settingScreen from "./settingScreen.js"
 import levelScreen from "./levelScreen.js"
 import Drag from "./Drag.js"
 import { spr } from "../Sprite/loadSprite.js"

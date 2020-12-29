@@ -1,6 +1,7 @@
 import Screen from "./Screen.js"
 import Button from "./Button.js"
 import titleScreen from "./titleScreen.js"
+import gamingScreen from "./gamingScreen.js"
 import levelStat from "../levelStat.js"
 import { spr } from "../Sprite/loadSprite.js"
 
@@ -17,31 +18,43 @@ levelScreen.addFeatures = function(){
 	//choose level
 	new Button(225,125,75,75, e=>{
 		sessionStorage.setItem("level", "3x3")
+		levelScreen.kill()
+		gamingScreen.init()
 	}).attachView(
 		ls.drawThumb("3x3", 225, 125)
 	).applyTo(ls)
 	new Button(325,125,100,100, e=>{
 		sessionStorage.setItem("level", "4x4")
+		levelScreen.kill()
+		gamingScreen.init()
 	}).attachView(
 		ls.drawThumb("4x4", 325, 125)
 	).applyTo(ls)
 	new Button(325, 400,7*25,5*25, e=>{
 		sessionStorage.setItem("level", "bubble")
+		levelScreen.kill()
+		gamingScreen.init()
 	}).attachView(
 		ls.drawThumb("bubble", 325, 400)
 	).applyTo(ls)
 	new Button(325, 250, 8*25, 5*25, e=>{
 		sessionStorage.setItem("level", "damselfly")
+		levelScreen.kill()
+		gamingScreen.init()
 	}).attachView(
 		ls.drawThumb("damselfly", 325, 250)
 	).applyTo(ls)
 	new Button(100, 225, 8*25, 6*25, e=>{
 		sessionStorage.setItem("level", "waterdrop")
+		levelScreen.kill()
+		gamingScreen.init()
 	}).attachView(
 		ls.drawThumb("waterdrop", 100, 225)
 	).applyTo(ls)
-	new Button(175, 400, 75, 75, e=>{
+	new Button(175, 400, 125, 125, e=>{
 		sessionStorage.setItem("level", "flower")
+		levelScreen.kill()
+		gamingScreen.init()
 	}).attachView(
 		ls.drawThumb("flower", 175, 400)
 	).applyTo(ls)
@@ -55,10 +68,10 @@ levelScreen.addFeatures = function(){
 }
 ls.strokedSquare = function(color, x, y, h, w){
 	return scr=>{
-		scr.ctx.strokeStyle = "black"
+		scr.ctx.strokeStyle = "white"
 		scr.ctx.strokeRect(x, y, h, w)
-		scr.ctx.fillStyle = color
-		scr.ctx.fillRect(x, y, h, w)
+		//scr.ctx.fillStyle = color
+		//scr.ctx.fillRect(x, y, h, w)
 	}
 }
 ls.drawThumb = function(level, x, y){
